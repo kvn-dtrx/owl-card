@@ -1,0 +1,47 @@
+- description: "jean-luc-picard"
+  givenname: "Jean-Luc"
+  lastname: "Picard"
+  additionalnames: "Xavier"
+  honoricprefix: "Captain"
+  honoricsuffix: "Diplomatic Attaché, Ret."
+  birthday: "2305-07-13"
+  street: "Château Picard, Route de La Barre"
+  locality: "La Barre"
+  region: "Bourgogne"
+  postalcode: "F-71000"
+  country: "France, Earth"
+  email: "jlp@starfleet.ufp"
+  phone: "+1 1701 NCC"
+  website: "https://teaearlgreyhot.com"
+  githubsite: "https://github.com/makeitso"
+  pgpkey: |
+    -----BEGIN PGP PUBLIC KEY BLOCK-----
+
+    mQINBFenterpriseEACFENGAGEcmdrOrder88DixonHillKeyLog92TeaMode99
+    diplomacyPhaserKEYnonlethalDiplomacyOverride==
+    =VINEYARD
+    -----END PGP PUBLIC KEY BLOCK-----
+
+- description: "william-riker"
+  givenname: "William"
+  lastname: "Riker"
+  additionalnames: "Thomas"
+  honoricprefix: "Commander"
+  honoricsuffix: "XO, USS Titan"
+  birthday: "2335-08-19"
+  street: "Deck 1, Executive Quarters, USS Titan"
+  locality: "Alpha Quadrant"
+  region: "Federation Space"
+  postalcode: "NCC-80102"
+  country: "United Federation of Planets"
+  email: "riker@starfleet.ufp"
+  phone: "+1 1701 BRAVO"
+  website: "https://numberone.trombone"
+  githubsite: "https://github.com/riker-maneuver"
+  pgpkey: |
+    -----BEGIN PGP PUBLIC KEY BLOCK-----
+
+    mQINBFnumberoneEACJJAZZKEYtrombone4CommandMode90RedAlertOverride++
+    charmOFFICERProtocolAlpha99BridgeChairSpin==
+    =WINK
+    -----END PGP PUBLIC KEY BLOCK-----
