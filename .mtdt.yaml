@@ -1,0 +1,19 @@
+project:
+  name: Owl Card
+  description: A custom LaTeX template for business cards
+  github: https://github.com/kvn-dtrx/owl-card
+  authors:
+    - name: Kvn Dtrx
+      mail: kvn.dtrx+git@protonmail.ch
+
+resources:
+  license:
+    type: MIT
+    year: 2025
+  gitignore:
+    includes: ["base", "latex"]
+  latexmkrc:
+    includes: ["base", "lualatex"]
+    parent: tex/
+  makefile:
+    type: tex-plain
