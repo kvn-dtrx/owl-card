@@ -60,7 +60,8 @@
 % geometry - Flexible and complete interface to document dimensions.
 \RequirePackage{geometry}
 \geometry{
-    % TODO: Insert note on DIN size
+    % Compare with:
+    % <https://metaliccards.com/en/blog/business-card-sizes-and-dimensions>
     paperwidth={85mm},
     paperheight={55mm},
     inner={7.5mm},
