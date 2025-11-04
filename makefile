@@ -1,4 +1,3 @@
-
 .PHONY: help render compile build clean reset rebuild
 
 help: ## Shows this help

@@ -24,11 +24,11 @@
 \keys_define:nn { oc/doc-style }
 {
     accentcolor .code:n = { \prop_put:Nnn \g__oc_doc_style_prop { accentcolor } {#1} },
-    accentcolor .initial:n = red,
+    accentcolor .initial:n = lightgray,
     bgcolor .code:n = { \prop_put:Nnn \g__oc_doc_style_prop { bgcolor } {#1} },,
     bgcolor .initial:n = black,
     fgcolor .code:n = { \prop_put:Nnn \g__oc_doc_style_prop { fgcolor } {#1} },
-    fgcolor .initial:n = white,
+    fgcolor .initial:n = black,
 }
 
 \ProcessKeyOptions[oc/doc-style]
@@ -60,8 +60,7 @@
 % geometry - Flexible and complete interface to document dimensions.
 \RequirePackage{geometry}
 \geometry{
-    % Compare with:
-    % <https://metaliccards.com/en/blog/business-card-sizes-and-dimensions>
+    % TODO: Insert note on DIN size
     paperwidth={85mm},
     paperheight={55mm},
     inner={7.5mm},
@@ -73,18 +72,10 @@
 % fontspec – Advanced font selection in XeLaTeX and LuaLaTeX.
 \usepackage{fontspec}
 
-% Sets default fonts.
-% \setmainfont{Libertinus Serif}
-\setsansfont{Libertinus Sans}[
-    Numbers={OldStyle,Proportional}
-]
-% \setmonofont{Libertinus Mono}
+\setmainfont{Latin Modern Roman}
+\setsansfont{Libertinus Sans}
 
-% Select sans serif font as default.
 \renewcommand*{\familydefault}{\sfdefault}
-
-% microtype – Subliminal refinements towards typographical perfection.
-\RequirePackage{microtype}
 
 % graphbox - Extend graphicx to improve placement of graphics.
 \RequirePackage{graphbox}
@@ -113,6 +104,8 @@
 
 % Creates a global property list to hold document information.
 \prop_new:N \g__oc_doc_info_property
+
+\ExplSyntaxOn
 
 % Global property list to hold document info.
 \prop_new:N \g__oc_doc_info_prop
@@ -150,8 +143,6 @@
     web .initial:n = { <VAR>web</VAR> },
     github .code:n = { \prop_put:Nnn \g__oc_doc_info_prop { github } {#1} },
     github .initial:n = { <VAR>github</VAR> },
-    linkedin .code:n = { \prop_put:Nnn \g__oc_doc_info_prop { linkedin } {#1} },
-    linkedin .initial:n = { <VAR>linkedin</VAR> },
     pgpkey .code:n = { \prop_put:Nnn \g__oc_doc_info_prop { pgpkey } { \detokenize{#1} } },
     pgpkey .initial:n = { \detokenize{<VAR>pgpkey</VAR>} },
 }
@@ -159,7 +150,7 @@
 \AtBeginDocument{
     \clist_new:N \l__oc_doc_info_keys_clist
     \clist_set:Nn \l__oc_doc_info_keys_clist {
-        givenname,lastname,additionalnames,honoricprefix,honoricsuffix,birthday,street,locality,region,postalcode,country,email,phone,web,github,linkedin,pgpkey
+        givenname,lastname,additionalnames,honoricprefix,honoricsuffix,birthday,street,locality,region,postalcode,country,email,phone,web,github,pgpkey
     }
     \clist_map_inline:Nn \l__oc_doc_info_keys_clist {
         \prop_get:NnN \g__oc_doc_info_prop { #1 } \l_tmpa_tl
@@ -179,21 +170,21 @@
 \pagestyle{empty}
 
 \newcommand*{\vcard}{%
-    BEGIN:VCARD^^J%
-    VERSION:4.0^^J%
-    N:\ocdiLastname;\ocdiGivenname;\ocdiAdditionalnames;\ocdiHonoricprefix;\ocdiHonoricsuffix^^J%
-    FN:\ocdiHonoricprefix{ }\ocdiGivenname{ }\ocdiAdditionalnames{ }\ocdiLastname{ }\ocdiHonoricsuffix^^J%
-    BDAY:\ocdiBirthday^^J%
-    ADR:;;\ocdiStreet;\ocdiLocality;\ocdiRegion;\ocdiPostalcode;\ocdiCountry^^J%
-    TEL:\ocdiPhone^^J%
-    EMAIL:\ocdiEmail^^J%
-    % % ENIGMA Are MATRIX entries really declared this way?
+    % BEGIN:VCARD^^J%
+    % VERSION:4.0^^J%
+    % N:\ocdiLastname;\ocdiGivenname;\ocdiAdditionalnames;\ocdiHonoricprefix;\ocdiHonoricsuffix^^J%
+    % FN:\ocdiHonoricprefix{ }\ocdiGivenname{ }\ocdiAdditionalnames{ }\ocdiLastname{ }\ocdiHonoricsuffix^^J%
+    % BDAY:\ocdiBirthday^^J%
+    % ADR:;;\ocdiStreet;\ocdiLocality;\ocdiRegion;\ocdiPostalcode;\ocdiCountry^^J%
+    % TEL:\ocdiPhone^^J%
+    % EMAIL:\ocdiEmail^^J%
+    % % WARNING Not sure whether MATRIX entries really are declared as here.
     % MATRIX:\ocdiMatrix^^J%
-    URL:https://\ocdiWeb^^J%
-    URL:https://www.linkedin.com/\ocdiLinkedin^^J%
-    URL:https://github.com/\ocdiGithub^^J%
+    % URL:https://\ocdiWeb^^J%
+    % URL:https://www.linkedin.com/\ocdiLinkedin^^J%
+    % URL:https://github.com/\ocdiGithub^^J%
     % KEY:\ocdiPGPkey^^J%
-    END:VCARD^^J%
+    % END:VCARD^^J%
 }
 
 \newcommand*{\MakeFront}{%
@@ -229,10 +220,8 @@
     \end{tikzpicture}
 }
 
-\newlength{\dotdistx}
-\setlength{\dotdistx}{5.0mm}
-\newlength{\dotdisty}
-\setlength{\dotdisty}{5.0mm}
+\newlength{\dotdistx}\setlength{\dotdistx}{5.0mm}
+\newlength{\dotdisty}\setlength{\dotdisty}{5.0mm}
 
 \pgfmathtruncatemacro{\dotnumx}{7}
 \pgfmathtruncatemacro{\dotnumy}{4}
