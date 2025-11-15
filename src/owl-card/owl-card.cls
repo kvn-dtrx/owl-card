@@ -141,6 +141,8 @@
     phone .initial:n = { <VAR>phone</VAR> },
     web .code:n = { \prop_put:Nnn \g__oc_doc_info_prop { web } {#1} },
     web .initial:n = { <VAR>web</VAR> },
+    linkedin .code:n = { \prop_put:Nnn \g__oc_doc_info_prop { linkedin } {#1} },
+    linkedin .initial:n = { <VAR>linkedin</VAR> },
     github .code:n = { \prop_put:Nnn \g__oc_doc_info_prop { github } {#1} },
     github .initial:n = { <VAR>github</VAR> },
     pgpkey .code:n = { \prop_put:Nnn \g__oc_doc_info_prop { pgpkey } { \detokenize{#1} } },
