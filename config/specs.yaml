@@ -12,8 +12,9 @@
   country: "France, Earth"
   email: "jlp@starfleet.ufp"
   phone: "+1 1701 NCC"
-  website: "https://teaearlgreyhot.com"
-  githubsite: "https://github.com/makeitso"
+  website: "teaearlgreyhot.com"
+  linkedin: "makeitso"
+  github: "makeitso"
   pgpkey: |
     -----BEGIN PGP PUBLIC KEY BLOCK-----
 
@@ -37,7 +38,8 @@
   email: "riker@starfleet.ufp"
   phone: "+1 1701 BRAVO"
   website: "https://numberone.trombone"
-  githubsite: "https://github.com/riker-maneuver"
+  linkedin: "riker-maneuver"
+  github: "riker-maneuver"
   pgpkey: |
     -----BEGIN PGP PUBLIC KEY BLOCK-----
 

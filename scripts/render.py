@@ -42,7 +42,10 @@ def main():
     for spec in specs:
         if "pgpkey" in spec and spec["pgpkey"]:
             spec["pgpkey"] = spec["pgpkey"].replace("\n", "^^J")
-        name = spec["description"].lower().replace(" ", "_")
+        for k in spec:
+            # ENIGMA: How to force qrcode to print blank characters?
+            spec[k] = spec[k].replace(" ", "~")
+        name = spec["description"].lower().replace(" ", "-")
         output_path = Path(args.output_dir) / f"{name}.tex"
         output_path.write_text(template.render(**spec), encoding="utf-8")
 

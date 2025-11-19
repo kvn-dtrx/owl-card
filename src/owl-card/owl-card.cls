@@ -72,6 +72,16 @@
 % fontspec – Advanced font selection in XeLaTeX and LuaLaTeX.
 \usepackage{fontspec}
 
+% Font features.
+\defaultfontfeatures{
+    % Enables classic TeX-style ligatures:
+    % - `fi', `fl' etc. with ligature.
+    % - `...` to …, `--` to `–` etc.
+    Ligatures=TeX,%
+    % Use old-style (text) digits with varying heights.
+    Numbers=OldStyle,%
+}
+
 \setmainfont{Latin Modern Roman}
 \setsansfont{Libertinus Sans}
 
@@ -95,6 +105,15 @@
 
 % qrcode – Generate QR codes in LaTeX.
 \RequirePackage{qrcode}
+
+% phonenumbers – Typesetting telephone numbers with LaTeX.
+\RequirePackage{phonenumbers}
+
+% Configures phonenumbers package.
+\setphonenumbers{
+    foreign,%
+    foreign-area-code-sep={space},%
+}
 
 % ---
 
@@ -152,7 +171,7 @@
 \AtBeginDocument{
     \clist_new:N \l__oc_doc_info_keys_clist
     \clist_set:Nn \l__oc_doc_info_keys_clist {
-        givenname,lastname,additionalnames,honoricprefix,honoricsuffix,birthday,street,locality,region,postalcode,country,email,phone,web,github,pgpkey
+        givenname,lastname,additionalnames,honoricprefix,honoricsuffix,birthday,street,locality,region,postalcode,country,email,phone,web,linkedin,github,pgpkey
     }
     \clist_map_inline:Nn \l__oc_doc_info_keys_clist {
         \prop_get:NnN \g__oc_doc_info_prop { #1 } \l_tmpa_tl
@@ -171,22 +190,24 @@
 
 \pagestyle{empty}
 
+% TODO Insert values conditionally on presence
+
 \newcommand*{\vcard}{%
-    % BEGIN:VCARD^^J%
-    % VERSION:4.0^^J%
-    % N:\ocdiLastname;\ocdiGivenname;\ocdiAdditionalnames;\ocdiHonoricprefix;\ocdiHonoricsuffix^^J%
-    % FN:\ocdiHonoricprefix{ }\ocdiGivenname{ }\ocdiAdditionalnames{ }\ocdiLastname{ }\ocdiHonoricsuffix^^J%
-    % BDAY:\ocdiBirthday^^J%
-    % ADR:;;\ocdiStreet;\ocdiLocality;\ocdiRegion;\ocdiPostalcode;\ocdiCountry^^J%
-    % TEL:\ocdiPhone^^J%
-    % EMAIL:\ocdiEmail^^J%
-    % % WARNING Not sure whether MATRIX entries really are declared as here.
+    BEGIN:VCARD^^J%
+    VERSION:3.0^^J%
+    N:\ocdiLastname;\ocdiGivenname;\ocdiAdditionalnames;\ocdiHonoricprefix;\ocdiHonoricsuffix^^J%
+    FN:\ocdiHonoricprefix{ }\ocdiGivenname{ }\ocdiAdditionalnames{ }\ocdiLastname{ }\ocdiHonoricsuffix^^J%
+    BDAY:\ocdiBirthday^^J%
+    ADR:;;\ocdiStreet;\ocdiLocality;\ocdiRegion;\ocdiPostalcode;\ocdiCountry^^J%
+    TEL:\ocdiPhone^^J%
+    EMAIL:\ocdiEmail^^J%
+    % WARNING Not sure whether MATRIX entries really are declared as here.
     % MATRIX:\ocdiMatrix^^J%
     % URL:https://\ocdiWeb^^J%
-    % URL:https://www.linkedin.com/\ocdiLinkedin^^J%
-    % URL:https://github.com/\ocdiGithub^^J%
+    URL:https://www.linkedin.com/in/\ocdiLinkedin^^J%
+    URL:https://github.com/\ocdiGithub^^J%
     % KEY:\ocdiPGPkey^^J%
-    % END:VCARD^^J%
+    END:VCARD^^J%
 }
 
 \newcommand*{\MakeFront}{%
@@ -200,14 +221,16 @@
             {\huge\color{fgcolor}{\bfseries\scshape{\color{accentcolor}\ocdiGivenname}~\ocdiLastname}}
         };
 
-        \def\radius{0.16\paperheight}
+        \def\radius{0.17\paperheight}
 
         \fill[white]
         ([shift={(-\radius,-\radius)}]C) rectangle ([shift={(\radius,\radius)}]C);
 
         \node[anchor=center]
         at ([yshift={0\paperheight}] C){%
-            \color{bgcolor}\qrcode[height={0.32\paperheight}]{\vcard}
+            \color{bgcolor}\qrcode[height={0.32\paperheight}]{%
+                \vcard%
+            }
         };
 
         \node[anchor=center]
@@ -217,7 +240,7 @@
 
         \node[anchor=center]
         at ([yshift={-0.40\paperheight}] C){%
-            {\color{fgcolor}{\bfseries\scshape{\color{accentcolor}Tel:}~\ocdiPhone}}
+            {\color{fgcolor}{\bfseries\scshape{\color{accentcolor}Tel:}~\phonenumber{\ocdiPhone}}}
         };
     \end{tikzpicture}
 }
