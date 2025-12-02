@@ -44,6 +44,6 @@ clean: ## Removes intermediate compilation files
 
 reset: ## Resets build directory and removes filled templates
 	@cd $(TEX) && latexmk -C
-	@find $(TEX) -mindepth 1 -name "*.tex" -delete
+	@find $(TEX) -mindepth 1 -iname "*.tex" -delete
 
 rebuild: reset render compile ## Executes reset, render and build
