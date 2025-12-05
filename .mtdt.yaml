@@ -5,7 +5,6 @@ project:
   authors:
     - name: Kvn Dtrx
       mail: kvn.dtrx+git@protonmail.ch
-
 resources:
   license:
     type: MIT
