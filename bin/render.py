@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 
 # ---
-# description: Renders LaTeX template from YAML data
+# description: >-
+#   Renders LaTeX template from YAML data
 # ---
 
 # ---
 
 import argparse
-import yaml
 from pathlib import Path
-from jinja2 import Environment
-from jinja2 import FileSystemLoader
+
+import yaml
+from jinja2 import Environment, FileSystemLoader
 
 
 def main():

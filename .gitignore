@@ -1,3 +1,9 @@
+# ---
+# title: Gitignore for Owl Card
+# ---
+
+# ---
+
 # Base
 
 # macOS
@@ -26,6 +32,7 @@ Thumbs.db
 
 # Logs and temporary files
 *.bak
+*.bak[0-9]*
 *.log
 *.swo
 *.swp
@@ -36,8 +43,11 @@ tmp/
 
 # ---
 
-# LaTeX
+# ---
+# title: LaTeX gitignore patterns
+# ---
 
+# ---
 ## Core latex/pdflatex auxiliary files
 .*.lb
 *.aux
