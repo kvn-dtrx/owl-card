@@ -6,31 +6,44 @@
 
 set shell := ["bash", "-eu", "-o", "pipefail", "-c"]
 
-tex := "tex"
+root := justfile_directory()
+latexmkrc := root / ".latexmkrc"
+examples := root / "examples"
+build-dir := "build"
 
 # Shows available recipes
 default:
     @just --list --unsorted
 
-# Fills template with supplied data
-render:
-    ./scripts/render.py --template config/main.tex.j2 --output-dir {{tex}} config/specs.yaml
+# Prepares build directory
+prepare:
+    mkdir -p {{build-dir}}
 
-# Compiles filled templates
-compile:
-    cd {{tex}} && latexmk
+# Fills template with supplied data into examples/<slug>/main.tex
+render:
+    ./bin/render.py --template config/main.tex.j2 --output-dir examples examples/specs.yaml
+
+# Compiles all examples/<slug>/main.tex into build/<slug>.pdf
+compile: prepare
+    #!/usr/bin/env bash
+    shopt -s nullglob
+    for main in "{{examples}}"/*/main.tex; do
+        slug="$(basename "$(dirname "${main}")")"
+        latexmk -cd -r "{{latexmkrc}}" -jobname="${slug}" "${main}"
+    done
 
 # Render then compile
 build: render compile
 
-# Removes intermediate compilation files
+# Removes intermediate files; keeps pdf/png/tex
 clean:
-    cd {{tex}} && latexmk -c
+    find {{build-dir}} -mindepth 1 \
+        ! \( -iname "*.pdf" -o -iname "*.png" -o -iname "*.tex" -o -iname ".gitkeep" \) \
+        -delete
 
-# Resets build artefacts and filled templates
+# Wipes build directory except .gitkeep
 reset:
-    cd {{tex}} && latexmk -C
-    find {{tex}} -mindepth 1 -iname "*.tex" -delete
+    find {{build-dir}} -mindepth 1 ! -iname ".gitkeep" -delete
 
-# Resets then rebuilds
+# Resets and rebuilds examples
 rebuild: reset build

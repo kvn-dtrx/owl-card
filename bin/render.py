@@ -47,7 +47,9 @@ def main():
             # ENIGMA: How to force qrcode to print blank characters?
             spec[k] = spec[k].replace(" ", "~")
         name = spec["description"].lower().replace(" ", "-")
-        output_path = Path(args.output_dir) / f"{name}.tex"
+        slug_dir = Path(args.output_dir) / name
+        slug_dir.mkdir(parents=True, exist_ok=True)
+        output_path = slug_dir / "main.tex"
         output_path.write_text(template.render(**spec), encoding="utf-8")
 
 
