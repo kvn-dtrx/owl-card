@@ -56,15 +56,14 @@ $bibtex_use = 2;
 # Out Dir
 
 # Puts PDF and aux under repo-root build/ without consulting .git (tarballs
-# strip it). Prefers WIRE_ROOT / TEX_ROOT (direnv, install stubs, just). Else
-# walks up for .mtdt.yaml — the project marker that survives export.
+# strip it). Honours explicit TEX_ROOT; otherwise walks up for .mtdt.yaml —
+# the project marker that survives export.
 use Cwd qw(getcwd abs_path);
 use File::Basename qw(dirname);
 
 sub _tex_project_root {
-    for my $key (qw(WIRE_ROOT TEX_ROOT)) {
-        my $env = $ENV{$key};
-        next unless defined $env && length $env;
+    my $env = $ENV{'TEX_ROOT'};
+    if ( defined $env && length $env ) {
         my $abs = abs_path($env);
         return $abs if defined $abs && -d $abs;
     }
@@ -86,7 +85,7 @@ if ($root) {
 }
 else {
     warn
-"latexmkrc/out-dir/build.pl: no WIRE_ROOT/TEX_ROOT/.mtdt.yaml; using relative build/\n";
+"latexmkrc/out-dir/build.pl: no TEX_ROOT/.mtdt.yaml; using relative build/\n";
     $out_dir = 'build';
     $aux_dir = 'build';
 }
