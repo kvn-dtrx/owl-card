@@ -12,12 +12,14 @@
 
 SRC := $(CURDIR)/src
 
-.PHONY: help install ln cp rm
+.PHONY: help install install-user ln cp rm
 
 help: ## Displays available targets with description
 	@bin/make-help.sh
 
-install: ln ## Symlinks packages into TEXMFHOME/tex/latex
+install: install-user ## Alias for install-user
+
+install-user: ln ## Symlinks packages into TEXMFHOME/tex/latex
 
 ln: ## Symlinks each src/<pkg> into TEXMFHOME/tex/latex
 	@set -e; \
