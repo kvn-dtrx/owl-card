@@ -4,6 +4,13 @@
     2025/09/01 v0.0-dev A LaTeX Class for Busines cards.%
 ]
 
+% ChkTeX misreads required spaces in expl3 key definitions as punctuation errors
+% chktex-file 26
+
+% iftex – Require LuaLaTeX for Unicode and OpenType support.
+\RequirePackage{iftex}
+\RequireLuaTeX
+
 % Compare with:
 % [Is there a good document template for making business cards?](https://tex.stackexchange.com/questions/4693)
 
