@@ -58,7 +58,7 @@ $bibtex_use = 2;
 # Puts PDF and aux under repo-root build/ without consulting .git (tarballs
 # strip it). Honours explicit TEX_ROOT; otherwise walks up for .mtdt.yaml —
 # the project marker that survives export.
-use Cwd qw(getcwd abs_path);
+use Cwd            qw(getcwd abs_path);
 use File::Basename qw(dirname);
 
 sub _tex_project_root {
@@ -68,7 +68,7 @@ sub _tex_project_root {
         return $abs if defined $abs && -d $abs;
     }
 
-    my $dir = abs_path(getcwd());
+    my $dir = abs_path( getcwd() );
     while ( defined $dir ) {
         return $dir if -f "$dir/.mtdt.yaml";
         my $parent = dirname($dir);
